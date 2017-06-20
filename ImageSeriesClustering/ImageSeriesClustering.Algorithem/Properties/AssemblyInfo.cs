@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ImageSeriesClustering.ConsoleApplication")]
+[assembly: AssemblyTitle("ImageSeriesClustering.Algorithem")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ImageSeriesClustering.ConsoleApplication")]
+[assembly: AssemblyProduct("ImageSeriesClustering.Algorithem")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4374b4df-d11f-4842-9884-908ef583e0cf")]
+[assembly: Guid("903e55b4-55bb-416f-b5a6-2424865735a9")]
 
 // Version information for an assembly consists of the following four values:
 //
