@@ -1,7 +1,9 @@
-﻿namespace ImageSeriesClustering.Algorithem
+﻿using System.Drawing;
+
+namespace ImageSeriesClustering.Algorithem
 {
     public interface IImageComparer
     {
-        double ImageSimilarityScore(string l, string r);
+        double ImageSimilarityScore(Image l, Image r);
     }
 }
