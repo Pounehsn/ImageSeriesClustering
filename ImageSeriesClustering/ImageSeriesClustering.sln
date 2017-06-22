@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.Algor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.Tests.Unit", "ImageSeriesClustering.Tests.Unit\ImageSeriesClustering.Tests.Unit.csproj", "{80EF5DCA-88BC-4D57-87E7-88CBDC61433E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.ImageTagger", "ImageSeriesClustering.ImageTagger\ImageSeriesClustering.ImageTagger.csproj", "{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{80EF5DCA-88BC-4D57-87E7-88CBDC61433E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80EF5DCA-88BC-4D57-87E7-88CBDC61433E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80EF5DCA-88BC-4D57-87E7-88CBDC61433E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
