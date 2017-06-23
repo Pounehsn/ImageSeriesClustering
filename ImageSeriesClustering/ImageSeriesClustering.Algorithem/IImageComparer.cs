@@ -4,6 +4,6 @@ namespace ImageSeriesClustering.Algorithem
 {
     public interface IImageComparer
     {
-        double ImageSimilarityScore(Image l, Image r);
+        double DifferenceScore(Image l, Image r);
     }
 }

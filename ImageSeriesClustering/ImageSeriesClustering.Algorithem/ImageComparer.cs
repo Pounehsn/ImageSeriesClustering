@@ -2,6 +2,7 @@
 using System.Drawing;
 using ImageProcessor;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 namespace ImageSeriesClustering.Algorithem
 {
@@ -9,7 +10,7 @@ namespace ImageSeriesClustering.Algorithem
     {
         private readonly ImageFactory _factory = new ImageFactory();
         private readonly Size _size = new Size(256, 256);
-        public double ImageSimilarityScore(Image l, Image r)
+        public double DifferenceScore(Image l, Image r)
         {
             if (l.Size != r.Size)
                 throw new Exception($"Invalid arguments. Left and right images should have the same size.");
@@ -23,7 +24,7 @@ namespace ImageSeriesClustering.Algorithem
                 for (var y = 0; y < l.Height; y++)
                     dif += GetDifference(bmpL.GetPixel(x, y), bmpR.GetPixel(x, y));
 
-            return 1 - dif / l.Width * l.Height;
+            return dif / (l.Width * l.Height);
         }
 
         private Image MakeRegulareImage(Image image)
@@ -40,11 +41,35 @@ namespace ImageSeriesClustering.Algorithem
                 }
         }
 
-        private double GetDifference(Color lc, Color rc) =>
-            lc == rc
+        private double GetDifference(Color lc, Color rc)
+        {
+            //var maxr = Math.Max(lc.R, rc.R);
+            //var maxg = Math.Max(lc.G, rc.G);
+            //var maxb = Math.Max(lc.B, rc.B);
+            //return lc == rc
+            //    ? 0
+            //    : (
+            //          (double)(maxr == 0 ? 0 : (double)Math.Abs(lc.R - rc.R) / maxr) +
+            //          (double)(maxg == 0 ? 0 : (double)Math.Abs(lc.G - rc.G) / maxg) +
+            //          (double)(maxb == 0 ? 0 : (double)Math.Abs(lc.B - rc.B) / maxb)
+            //      ) / 3;
+
+            var maxr = Math.Max(lc.R, rc.R);
+            var maxg = Math.Max(lc.G, rc.G);
+            var maxb = Math.Max(lc.B, rc.B);
+
+            var maxAve = (maxr + maxg + maxb) / 3.0;
+
+            var ave = (
+                lc.R - rc.R +
+                lc.G - rc.G +
+                lc.B - rc.B +
+                (255 * 3)
+            ) / 6.0;
+
+            return lc == rc
                 ? 0
-                : lc.R - rc.R / Math.Max(lc.R, rc.R) +
-                  lc.G - rc.G / Math.Max(lc.G, rc.G) +
-                  lc.B - rc.B / Math.Max(lc.B, rc.B);
+                : maxAve < double.Epsilon ? 0 : ave / maxAve;
+        }
     }
 }

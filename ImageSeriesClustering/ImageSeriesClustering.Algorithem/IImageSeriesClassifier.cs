@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace ImageSeriesClustering.Algorithem
 {
     public interface IImageSeriesClassifier
     {
-        IEnumerable<string> Classify(IEnumerable<string> series);
+        IEnumerable<FileInfo> Classify(IEnumerable<FileInfo> series);
     }
 }

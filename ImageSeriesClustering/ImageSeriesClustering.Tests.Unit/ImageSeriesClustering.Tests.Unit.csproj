@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,11 +45,89 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestImageSeriesClusteringAlgorithm.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTestImageComparer.cs" />
+    <Compile Include="UnitTestImageSeriesClassifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageSeriesClustering.Algorithem\ImageSeriesClustering.Algorithem.csproj">
+      <Project>{903E55B4-55BB-416F-B5A6-2424865735A9}</Project>
+      <Name>ImageSeriesClustering.Algorithem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_050835_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_050922_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051009_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051539_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051626_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051713_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051800_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_051847_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052021_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052108_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052155_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052242_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052329_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052416_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052503_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052603_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052650_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052737_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052824_000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\20160815_052911_000.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
