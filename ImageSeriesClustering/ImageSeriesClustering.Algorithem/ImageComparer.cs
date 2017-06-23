@@ -2,7 +2,6 @@
 using System.Drawing;
 using ImageProcessor;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace ImageSeriesClustering.Algorithem
 {

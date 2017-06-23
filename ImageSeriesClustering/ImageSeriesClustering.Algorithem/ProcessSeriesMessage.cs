@@ -1,13 +1,16 @@
-﻿namespace ImageSeriesClustering.Algorithem
+﻿using System.Collections.Generic;
+using System.IO;
+
+namespace ImageSeriesClustering.Algorithem
 {
     public class ProcessSeriesMessage
     {
-        public ProcessSeriesMessage(string staringFileName, int count)
+        public ProcessSeriesMessage(IEnumerable<FileInfo> fileNames, FileInfo outputFile)
         {
-            StaringFileName = staringFileName;
-            Count = count;
+            Files = fileNames;
+            OutputFile = outputFile;
         }
-        public string StaringFileName { get; }
-        public int Count { get; }
+        public IEnumerable<FileInfo> Files { get; }
+        public FileInfo OutputFile { get; }
     }
 }
