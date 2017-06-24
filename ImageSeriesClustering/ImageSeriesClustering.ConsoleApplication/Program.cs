@@ -12,10 +12,9 @@ namespace ImageSeriesClustering.ConsoleApplication
     {
         private static void Main(params string[] args)
         {
+
             var imageFolder = args[0];
             var outDirectory = args[1];
-            var cpuNumber = Environment.ProcessorCount;
-
 
             var factory = new ConfigFactory();
 
@@ -29,13 +28,14 @@ namespace ImageSeriesClustering.ConsoleApplication
 
             var directoryInfo = new DirectoryInfo(imageFolder);
             var directories = directoryInfo.GetDirectories();
-            var dirPerCpu = directories.Length / cpuNumber;
+            var processorNumber = Math.Min(Environment.ProcessorCount, directories.Length);
+            var dirPerCpu = directories.Length / processorNumber;
             var dirsForACpu = directories
-                .Select((v, i) => new {value = v, index = i})
+                .Select((v, i) => new { value = v, index = i })
                 .GroupBy(i => i.index / dirPerCpu)
-                .Select(i => i.Select(j=>j.value).ToArray())
+                .Select(i => i.Select(j => j.value).ToArray())
                 .ToArray();
-            
+
             // Create a new actor system (a container for your actors)
             using (
                 var system = ActorSystem.Create(
@@ -46,7 +46,7 @@ namespace ImageSeriesClustering.ConsoleApplication
             {
 
                 // Send a message to the actor
-                for (var i = 0; i < cpuNumber; i++)
+                for (var i = 0; i < processorNumber; i++)
                 {
                     // Create your actor and get a reference to it.
                     // This will be an "ActorRef", which is not a
@@ -64,7 +64,7 @@ namespace ImageSeriesClustering.ConsoleApplication
                     //send a message to the remote actor
                     actor.Tell(
                          new ProcessSeriesMessage(
-                             dirsForACpu[i].SelectMany(d=>d.GetFiles()),
+                             dirsForACpu[i].SelectMany(d => d.GetFiles()),
                              new FileInfo($"{outDirectory}\\{i}.txt")
                          )
                      );
@@ -80,7 +80,7 @@ namespace ImageSeriesClustering.ConsoleApplication
             var resultDir = new FileInfo($"{outDirectory}\\FinalList.txt");
             using (var resultStream = resultDir.CreateText())
             {
-                for (var i = 0; i < cpuNumber; i++)
+                for (var i = 0; i < processorNumber; i++)
                 {
                     var partialResultFile = new FileInfo($"{outDirectory}\\{i}.txt");
 
