@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.ImageTagger", "ImageSeriesClustering.ImageTagger\ImageSeriesClustering.ImageTagger.csproj", "{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.Server", "ImageSeriesClustering.Server\ImageSeriesClustering.Server.csproj", "{5111D237-D27A-450F-94E1-CAA25A2D65C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSeriesClustering.Core", "ImageSeriesClustering.Core\ImageSeriesClustering.Core.csproj", "{62BD0772-A936-43B9-964F-C8B0524866A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5111D237-D27A-450F-94E1-CAA25A2D65C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5111D237-D27A-450F-94E1-CAA25A2D65C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5111D237-D27A-450F-94E1-CAA25A2D65C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5111D237-D27A-450F-94E1-CAA25A2D65C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62BD0772-A936-43B9-964F-C8B0524866A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62BD0772-A936-43B9-964F-C8B0524866A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62BD0772-A936-43B9-964F-C8B0524866A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62BD0772-A936-43B9-964F-C8B0524866A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

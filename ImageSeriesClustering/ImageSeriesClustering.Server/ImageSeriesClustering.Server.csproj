@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4374B4DF-D11F-4842-9884-908EF583E0CF}</ProjectGuid>
+    <ProjectGuid>{5111D237-D27A-450F-94E1-CAA25A2D65C0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageSeriesClustering.ConsoleApplication</RootNamespace>
-    <AssemblyName>ImageSeriesClustering.ConsoleApplication</AssemblyName>
+    <RootNamespace>ImageSeriesClustering.Server</RootNamespace>
+    <AssemblyName>ImageSeriesClustering.Server</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,13 +22,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Akka, Version=1.2.1.37, Culture=neutral, processorArchitecture=MSIL">
@@ -194,25 +194,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ClusteringServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ImageSeriesClustering.Algorithem\ImageSeriesClustering.Algorithem.csproj">
-      <Project>{903e55b4-55bb-416f-b5a6-2424865735a9}</Project>
-      <Name>ImageSeriesClustering.Algorithem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ImageSeriesClustering.Core\ImageSeriesClustering.Core.csproj">
-      <Project>{62BD0772-A936-43B9-964F-C8B0524866A4}</Project>
+      <Project>{62bd0772-a936-43b9-964f-c8b0524866a4}</Project>
       <Name>ImageSeriesClustering.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ImageSeriesClustering.ImageTagger\ImageSeriesClustering.ImageTagger.csproj">
-      <Project>{624FB9C6-0C8C-437C-A834-5EC85FF43DDD}</Project>
-      <Name>ImageSeriesClustering.ImageTagger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

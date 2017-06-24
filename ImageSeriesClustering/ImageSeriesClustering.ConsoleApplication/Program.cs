@@ -1,42 +1,74 @@
 ﻿using System;
 using System.IO;
 using Akka.Actor;
-using ImageSeriesClustering.Algorithem;
+using ImageSeriesClustering.Core;
+using System.Configuration;
+using System.Linq;
+using ImageSeriesClustering.ImageTagger;
 
 namespace ImageSeriesClustering.ConsoleApplication
 {
     public static class Program
     {
-        private static void Main(string[] args)
+        private static void Main(params string[] args)
         {
-            var imageFolder = @"D:\Pouneh\Image Series Clustering\ImageSeriesClustering\ImageSeriesClustering.ConsoleApplication\Images";
-            var outDirectory = "../../OutPut";
-            var cpuNumber = 14;
-            // Create a new actor system (a container for your actors)
-            var system = ActorSystem.Create("ImageClusteringSystem");
+            var imageFolder = args[0];
+            var outDirectory = args[1];
+            var cpuNumber = Environment.ProcessorCount;
+
+
+            var factory = new ConfigFactory();
+
+            var configurations = factory.Create(
+                ConfigurationManager.AppSettings.Get("hostname"),
+                int.Parse(ConfigurationManager.AppSettings.Get("port"))
+            );
+
+            Console.WriteLine(configurations);
+
 
             var directoryInfo = new DirectoryInfo(imageFolder);
-            var files = directoryInfo.GetFiles();
-            var batchSize = files.Length / cpuNumber;
-            // Send a message to the actor
-            for (var i = 0; i < cpuNumber; i++)
+            var directories = directoryInfo.GetDirectories();
+            var dirPerCpu = directories.Length / cpuNumber;
+            var dirsForACpu = directories
+                .Select((v, i) => new {value = v, index = i})
+                .GroupBy(i => i.index / dirPerCpu)
+                .Select(i => i.Select(j=>j.value).ToArray())
+                .ToArray();
+            
+            // Create a new actor system (a container for your actors)
+            using (
+                var system = ActorSystem.Create(
+                    "ImageSeriesClusteringService",
+                    configurations
+                )
+            )
             {
-                // Create your actor and get a reference to it.
-                // This will be an "ActorRef", which is not a
-                // reference to the actual actor instance
-                // but rather a client or proxy to it.
-                var greeter = system.ActorOf<ClusteringActor>($"ImmageSeriesClustering{i}");
 
-                var f = new FileInfo[batchSize];
+                // Send a message to the actor
+                for (var i = 0; i < cpuNumber; i++)
+                {
+                    // Create your actor and get a reference to it.
+                    // This will be an "ActorRef", which is not a
+                    // reference to the actual actor instance
+                    // but rather a client or proxy to it.
 
-                Array.Copy(files, i*batchSize, f, 0, batchSize);
+                    //get a reference to the remote actor
+                    var host = ConfigurationManager.AppSettings.Get("serverhostname");
+                    var port = int.Parse(ConfigurationManager.AppSettings.Get("serverport"));
+                    var actor = system
+                        .ActorSelection(
+                            $"akka.tcp://ImageSeriesClusteringService@{host}:{port}/user/clustering"
+                        );
 
-                greeter.Tell(
-                    new ProcessSeriesMessage(
-                        f,
-                        new FileInfo($"{outDirectory}\\{i}.txt")
-                    )
-                );
+                    //send a message to the remote actor
+                    actor.Tell(
+                         new ProcessSeriesMessage(
+                             dirsForACpu[i].SelectMany(d=>d.GetFiles()),
+                             new FileInfo($"{outDirectory}\\{i}.txt")
+                         )
+                     );
+                }
             }
 
             Console.WriteLine("Messages are sent.");
@@ -44,6 +76,39 @@ namespace ImageSeriesClustering.ConsoleApplication
             // This prevents the application from exiting
             // before the asynchronous work is done
             Console.ReadLine();
+
+            var resultDir = new FileInfo($"{outDirectory}\\FinalList.txt");
+            using (var resultStream = resultDir.CreateText())
+            {
+                for (var i = 0; i < cpuNumber; i++)
+                {
+                    var partialResultFile = new FileInfo($"{outDirectory}\\{i}.txt");
+
+                    using (var partialResultStream = partialResultFile.OpenText())
+                    {
+                        resultStream.WriteLine(partialResultStream.ReadToEnd());
+                    }
+                }
+            }
+
+            var tagger = new Tagger("'feaf4fc6b0c6421fbdb1c44acf166901'", "westus.api.cognitive.microsoft.com");
+
+            var tagFile = new FileInfo($"{outDirectory}\\MicrosoftVisionAPI.txt");
+
+            using (var resultStream = resultDir.OpenText())
+            {
+                using (var tagStream = tagFile.CreateText())
+                {
+                    while (!resultStream.EndOfStream)
+                    {
+                        var file = resultStream.ReadLine();
+
+                        var tags = tagger.Tag(file).Result;
+
+                        tagStream.WriteLine(tags);
+                    }
+                }
+            }
         }
     }
 }

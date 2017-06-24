@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ImageSeriesClustering.Algorithem
+namespace ImageSeriesClustering.Core
 {
     public class ProcessSeriesMessage
     {
